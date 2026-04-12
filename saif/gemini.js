@@ -75,7 +75,7 @@
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "author": "MahMud"
+          "author": "MahMUd"
         },
         body: JSON.stringify(body)
       });
