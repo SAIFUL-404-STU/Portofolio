@@ -7,6 +7,7 @@
     "qrcode.js",
     "texttools.js",
     "agecalc.js",
-    "dictionary.js"
+    "dictionary.js",
+    "imageenhancer.js"
   ]
 }
