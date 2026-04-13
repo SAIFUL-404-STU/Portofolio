@@ -571,7 +571,7 @@ body.light h1 {
     <div style="font-size:2.5rem;margin-bottom:10px;">👑</div>
     <h2 style="color:var(--gold);font-family:'Syne',sans-serif;font-size:1.7rem;margin-bottom:6px;">WELCOME</h2>
     <p style="font-size:0.88rem;opacity:0.75;color:var(--text);margin-bottom:5px;">Enter your name to join Saif Elite</p>
-    <input type="text" id="userNameInput" placeholder="Your legendary name...">
+    <input type="text" id="userNameInput" placeholder="Your Name...">
     <button onclick="saveName()" style="background:linear-gradient(135deg,var(--fire1),var(--fire2));border:none;padding:14px;border-radius:13px;font-weight:900;cursor:pointer;width:100%;font-size:0.95rem;color:#000;font-family:'Outfit',sans-serif;margin-top:5px;">ENTER ELITE WORLD</button>
   </div>
 </div>
@@ -788,7 +788,7 @@ body.light h1 {
     <a class="fb" id="socialFb" href="https://www.facebook.com/saiful.404.st" target="_blank"><i class="fab fa-facebook-f"></i></a>
     <a class="wa" id="socialWa" href="https://wa.me/8801823772045" target="_blank"><i class="fab fa-whatsapp"></i></a>
     <a class="ig" id="socialIg" href="https://www.instagram.com/saiful_404_st" target="_blank"><i class="fab fa-instagram"></i></a>
-    <a class="mail" id="socialMail" href="mailto:saifmorse04@gmail.com"><i class="fas fa-envelope"></i></a>
+    <a class="mail" id="socialMail" href="/cdn-cgi/l/email-protection#9fecfef6f9f2f0edecfaafabdff8f2fef6f3b1fcf0f2"><i class="fas fa-envelope"></i></a>
   </div>
 
   <div class="visitor-box">
@@ -802,7 +802,7 @@ body.light h1 {
   <div class="footer" onclick="openAdmin()" style="cursor:pointer;"
        onmouseover="this.style.opacity='1';this.style.borderColor='var(--gold)';"
        onmouseout="this.style.opacity='0.55';this.style.borderColor='var(--footer-border)';">
-    <i class="fas fa-fire"></i> ELITE PROFILE • SAIF BABY <i class="fas fa-crown"></i>
+    <i class="fas fa-fire"></i> ELITE PROFILE • SAIF BABY  <i class="fas fa-crown"></i>
   </div>
 </div>
 </div>
@@ -844,9 +844,9 @@ body.light h1 {
       <div><span class="c-label">Instagram</span><span class="c-value" id="contactIgVal">saiful_404_st</span></div>
       <i class="fas fa-chevron-right" style="margin-left:auto;color:var(--gold);opacity:0.5;"></i>
     </a>
-    <a class="contact-link" id="contactMailLink" href="mailto:saifmorse04@gmail.com">
+    <a class="contact-link" id="contactMailLink" href="/cdn-cgi/l/email-protection#9ceffdf5faf1f3eeeff9aca8dcfbf1fdf5f0b2fff3f1">
       <div class="c-icon" style="background:linear-gradient(135deg,#ea4335,#d02c1e);"><i class="fas fa-envelope" style="color:#fff;"></i></div>
-      <div><span class="c-label">Email</span><span class="c-value" id="contactEmailVal">saifmorse04@gmail.com</span></div>
+      <div><span class="c-label">Email</span><span class="c-value" id="contactEmailVal"><span class="__cf_email__" data-cfemail="e695878f808b89949583d6d2a6818b878f8ac885898b">[email&#160;protected]</span></span></div>
       <i class="fas fa-chevron-right" style="margin-left:auto;color:var(--gold);opacity:0.5;"></i>
     </a>
     <a class="contact-link" href="https://m.me/j/AbYhrDx5QWRQ54or/" target="_blank">
@@ -858,20 +858,20 @@ body.light h1 {
 
   <div style="background:var(--card-bg);border-radius:24px;padding:24px;border:1px solid rgba(255,215,0,0.12);backdrop-filter:blur(20px);margin-top:16px;">
     <div class="section-title" style="margin:0 0 16px 0;font-size:0.75rem;"><i class="fas fa-paper-plane"></i> Send Message</div>
-    <input type="text" id="contactName" placeholder="Tomar naam..." style="margin:0 0 8px 0;">
-    <textarea id="contactMsg" rows="4" placeholder="Kisu bolte chao?..." style="margin:0 0 12px 0;"></textarea>
+    <input type="text" id="contactName" placeholder="Your Name" style="margin:0 0 8px 0;">
+    <textarea id="contactMsg" rows="4" placeholder="Kisu bolba jan? " style="margin:0 0 12px 0;"></textarea>
     <button onclick="sendContactMessage()" style="width:100%;padding:13px;border-radius:13px;border:none;background:linear-gradient(135deg,var(--fire1),var(--fire2));color:#000;font-weight:900;font-size:0.92rem;cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.3s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 28px rgba(255,102,0,0.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
       <i class="fas fa-paper-plane"></i> SEND MESSAGE
     </button>
   </div>
 
   <div class="footer" style="margin-top:20px;text-align:center;">
-    <i class="fas fa-fire"></i> ELITE PROFILE • SAIF BABY <i class="fas fa-crown"></i>
+    <i class="fas fa-fire"></i> ELITE PROFILE • SAIF BABY  <i class="fas fa-crown"></i>
   </div>
 </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 // ===== CONFIG =====
 const ADMIN_CREDENTIALS = { email:"saifmorse04@gmail.com", password:"saiful@1" };
@@ -1315,7 +1315,7 @@ function sendContactMessage(){
   const name=document.getElementById('contactName').value.trim();
   const msg=document.getElementById('contactMsg').value.trim();
   if(!name||!msg){showNotification('Naam ar message duita likhoo!','error');return;}
-  db.ref('messages/').push({name,message:msg,timestamp:new Date().toISOString()}).then(()=>{
+  db.ref('messages/').push({name,message:msg,timestamp:new Date().toISOString(),read:false}).then(()=>{
     showNotification('✅ Message sent baby!','success');
     document.getElementById('contactName').value='';
     document.getElementById('contactMsg').value='';
@@ -1377,14 +1377,4 @@ window.getSaifToolZone = function(){
     const res=await fetch('./saif/manifest.json?v='+Date.now());
     if(!res.ok)throw new Error('manifest not found');
     const{plugins}=await res.json();
-    for(const file of plugins){
-      const s=document.createElement('script');
-      s.src=`./saif/${file}?v=${Date.now()}`;
-      document.body.appendChild(s);
-      console.log('[Saif Plugin] '+file+' ✅');
-    }
-  }catch(e){console.warn('[Saif Plugin] '+e.message);}
-})();
-</script>
-</body>
-</html>
+    for(const
