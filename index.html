@@ -494,6 +494,73 @@ body.light h1 {
 .dl-btn { width:100%; padding:13px; border-radius:13px; border:none; background:linear-gradient(135deg,var(--fire1),var(--fire2)); color:#000; font-weight:900; cursor:pointer; font-size:0.92rem; letter-spacing:0.5px; transition:all 0.3s; font-family:'Outfit',sans-serif; }
 .dl-btn:hover { transform:translateY(-3px); box-shadow:0 10px 25px rgba(255,102,0,0.5); }
 
+/* ===== SCROLL REVEAL ===== */
+.reveal { opacity:0; transform:translateY(30px); transition:opacity .7s ease,transform .7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.delay-1 { transition-delay:0.1s; }
+.delay-2 { transition-delay:0.2s; }
+.delay-3 { transition-delay:0.3s; }
+
+/* ===== TYPING ANIMATION ===== */
+.typing-wrap { font-size:0.9rem; color:var(--gold); font-weight:700; margin:6px 0 14px; min-height:1.5em; letter-spacing:0.5px; }
+.typing-cursor { display:inline-block; width:2px; height:0.9em; background:var(--gold); animation:cursorBlink .7s infinite; vertical-align:middle; margin-left:2px; border-radius:1px; }
+@keyframes cursorBlink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+
+/* ===== VIP BADGE ===== */
+.vip-badge { display:inline-flex; align-items:center; gap:5px; background:linear-gradient(135deg,#ffd700,#ff9900); color:#000; padding:4px 14px; border-radius:20px; font-size:0.68rem; font-weight:900; margin:6px 0; box-shadow:0 0 16px rgba(255,215,0,0.4); animation:vipPulse 2s ease-in-out infinite alternate; }
+@keyframes vipPulse { from{box-shadow:0 0 10px rgba(255,215,0,0.25);} to{box-shadow:0 0 25px rgba(255,215,0,0.65);} }
+
+/* ===== SKILLS SECTION ===== */
+.skills-wrap { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:12px; margin-bottom:6px; }
+.skill-card {
+  background:rgba(255,215,0,0.04); border:1px solid rgba(255,215,0,0.12);
+  border-radius:18px; padding:18px 14px; text-align:center;
+  transition:all 0.35s; cursor:default; position:relative; overflow:hidden;
+}
+.skill-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--fire1),var(--gold),transparent); opacity:0; transition:opacity 0.3s; }
+.skill-card:hover { border-color:rgba(255,215,0,0.4); background:rgba(255,215,0,0.08); transform:translateY(-5px); box-shadow:0 14px 30px rgba(255,102,0,0.12); }
+.skill-card:hover::before { opacity:1; }
+.skill-emoji { font-size:1.8rem; margin-bottom:8px; display:block; }
+.skill-name { font-size:0.78rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+.skill-bar { height:4px; background:rgba(255,255,255,0.08); border-radius:4px; overflow:hidden; }
+.skill-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,var(--fire1),var(--gold)); width:0; transition:width 1.3s cubic-bezier(0.4,0,0.2,1); }
+
+/* ===== PROJECTS SECTION ===== */
+.projects-grid { display:grid; grid-template-columns:1fr; gap:14px; }
+.project-card {
+  background:rgba(255,215,0,0.03); border:1.5px solid rgba(255,215,0,0.1);
+  border-radius:20px; padding:20px; transition:all 0.35s;
+  position:relative; overflow:hidden;
+}
+.project-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--fire1),var(--gold),transparent); opacity:0; transition:opacity 0.3s; }
+.project-card:hover { border-color:rgba(255,215,0,0.38); transform:translateY(-5px); box-shadow:0 18px 45px rgba(255,102,0,0.12); }
+.project-card:hover::before { opacity:1; }
+.project-header { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:10px; }
+.project-title { font-family:'Syne',sans-serif; font-size:1rem; font-weight:800; color:var(--gold); }
+.project-actions { display:flex; gap:7px; flex-shrink:0; }
+.project-btn { width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; border:1.5px solid rgba(255,215,0,0.22); background:rgba(255,215,0,0.07); color:var(--gold); font-size:0.88rem; transition:all 0.3s; text-decoration:none; }
+.project-btn:hover { background:var(--gold); color:#000; border-color:var(--gold); transform:scale(1.1); }
+.project-desc { font-size:0.8rem; line-height:1.65; opacity:0.75; margin-bottom:12px; color:var(--text); }
+.project-tags { display:flex; gap:6px; flex-wrap:wrap; }
+.project-tag { padding:3px 10px; border-radius:8px; font-size:0.64rem; font-weight:700; background:rgba(255,215,0,0.1); color:var(--gold); border:1px solid rgba(255,215,0,0.22); }
+
+/* ===== MSG + USER DETAIL CARDS (Admin) ===== */
+.user-detail-card { background:rgba(255,215,0,0.03); border:1.5px solid rgba(255,215,0,0.1); border-radius:15px; padding:15px; margin-bottom:10px; transition:all 0.3s; }
+.user-detail-card:hover { border-color:rgba(255,215,0,0.3); }
+.msg-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,215,0,0.08); border-radius:13px; padding:14px; margin-bottom:9px; position:relative; }
+.msg-unread { position:absolute; top:11px; right:11px; width:7px; height:7px; background:#ff416c; border-radius:50%; }
+.msg-name { font-weight:900; font-size:0.88rem; color:var(--gold); margin-bottom:4px; }
+.msg-text { font-size:0.8rem; opacity:0.8; color:var(--text); line-height:1.5; margin-bottom:8px; }
+.msg-time { font-size:0.63rem; opacity:0.45; color:var(--text); }
+
+/* ===== EMERGENCY BANNER ===== */
+.emergency-banner { display:none; position:fixed; top:64px; left:0; right:0; z-index:890; background:linear-gradient(135deg,#ff416c,#ff4b2b); padding:10px 20px; align-items:center; justify-content:center; gap:10px; animation:bannerPulse 1.5s ease-in-out infinite alternate; }
+.emergency-banner.active { display:flex; }
+@keyframes bannerPulse { from{box-shadow:0 4px 20px rgba(255,65,108,0.4);} to{box-shadow:0 4px 40px rgba(255,65,108,0.8);} }
+.emergency-banner p { color:#fff; font-weight:900; font-size:0.88rem; margin:0; }
+.close-banner { background:rgba(255,255,255,0.2); border:none; color:#fff; width:26px; height:26px; border-radius:50%; cursor:pointer; font-size:0.8rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+body.banner-active .wrap { margin-top:142px !important; }
+
 /* ===== RESPONSIVE ===== */
 @media (max-width:768px) {
   .admin-container { border:none; }
@@ -508,6 +575,13 @@ body.light h1 {
 </style>
 </head>
 <body>
+
+<!-- Emergency Banner -->
+<div class="emergency-banner" id="emergencyBanner">
+  <i class="fas fa-exclamation-triangle" style="color:#fff;flex-shrink:0;"></i>
+  <p id="emergencyBannerText"></p>
+  <button class="close-banner" onclick="dismissBanner()"><i class="fas fa-times"></i></button>
+</div>
 
 <!-- Rain Canvas -->
 <canvas class="rain-canvas" id="rainCanvas"></canvas>
@@ -605,6 +679,9 @@ body.light h1 {
     <div class="admin-nav">
       <button class="nav-tab active" onclick="switchTab('dashboard',event)"><i class="fas fa-tachometer-alt"></i> Dashboard</button>
       <button class="nav-tab" onclick="switchTab('users',event)"><i class="fas fa-users"></i> Users</button>
+      <button class="nav-tab" onclick="switchTab('messages',event)"><i class="fas fa-envelope"></i> Messages <span id="msgBadge" style="background:#ff416c;color:#fff;font-size:0.58rem;padding:2px 6px;border-radius:8px;margin-left:3px;display:none;">0</span></button>
+      <button class="nav-tab" onclick="switchTab('notify',event)"><i class="fas fa-bell"></i> Notify</button>
+      <button class="nav-tab" onclick="switchTab('vip',event)"><i class="fas fa-crown"></i> VIP</button>
       <button class="nav-tab" onclick="switchTab('content',event)"><i class="fas fa-edit"></i> Content</button>
       <button class="nav-tab" onclick="switchTab('stories',event)"><i class="fas fa-book"></i> Stories</button>
       <button class="nav-tab" onclick="switchTab('system',event)"><i class="fas fa-server"></i> System</button>
@@ -705,6 +782,58 @@ body.light h1 {
       </div>
     </div>
 
+    <!-- Messages Tab -->
+    <div id="messagesTab" class="admin-content" style="display:none;">
+      <div class="admin-section" style="grid-column:1/-1;">
+        <h3><i class="fas fa-envelope"></i> Contact Messages</h3>
+        <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
+          <button class="btn btn-warning" onclick="loadMessages()"><i class="fas fa-sync"></i> Refresh</button>
+          <button class="btn btn-danger" onclick="clearAllMessages()"><i class="fas fa-trash"></i> Clear All</button>
+        </div>
+        <div id="messagesContainer"><div style="text-align:center;padding:28px;opacity:0.5;"><div class="spinner"></div><p style="margin-top:10px;">Loading...</p></div></div>
+      </div>
+    </div>
+
+    <!-- Notify Tab -->
+    <div id="notifyTab" class="admin-content" style="display:none;">
+      <div class="admin-section">
+        <h3><i class="fas fa-bell"></i> Emergency Banner</h3>
+        <p style="font-size:0.8rem;opacity:0.6;margin-bottom:13px;">Site এ সবার কাছে live alert banner পাঠাও।</p>
+        <div class="form-group"><label>BANNER MESSAGE</label><input type="text" id="bannerMsg" placeholder="e.g. Site maintenance tonight!" style="margin:0;"></div>
+        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">
+          <button class="btn btn-danger" onclick="sendEmergencyBanner()" style="flex:1;"><i class="fas fa-broadcast-tower"></i> Send</button>
+          <button class="btn btn-dark" onclick="clearEmergencyBanner()" style="flex:1;"><i class="fas fa-times"></i> Clear</button>
+        </div>
+        <div id="bannerPreview" style="display:none;margin-top:13px;padding:11px;border-radius:11px;background:linear-gradient(135deg,#ff416c,#ff4b2b);color:#fff;font-weight:700;font-size:0.82rem;text-align:center;">Preview: <span id="bannerPreviewText"></span></div>
+      </div>
+      <div class="admin-section">
+        <h3><i class="fas fa-paper-plane"></i> Push Notification</h3>
+        <p style="font-size:0.8rem;opacity:0.6;margin-bottom:13px;">সব user এর screen এ popup পাঠাও।</p>
+        <div class="form-group"><label>TITLE</label><input type="text" id="pushTitle" placeholder="Notification title..." style="margin:0 0 8px 0;"></div>
+        <div class="form-group"><label>MESSAGE</label><textarea id="pushMsg" rows="2" placeholder="Message..." style="margin:0;"></textarea></div>
+        <select id="pushType" style="margin:8px 0;"><option value="info">ℹ️ Info</option><option value="success">✅ Success</option><option value="error">🚨 Alert</option><option value="warning">⚠️ Warning</option></select>
+        <button class="btn btn-warning" onclick="sendPushNotification()" style="width:100%;"><i class="fas fa-paper-plane"></i> Send to All</button>
+      </div>
+    </div>
+
+    <!-- VIP Tab -->
+    <div id="vipTab" class="admin-content" style="display:none;">
+      <div class="admin-section">
+        <h3><i class="fas fa-crown"></i> Grant VIP</h3>
+        <div class="form-group"><label>USER NAME</label><input type="text" id="vipUserName" placeholder="User name exactly..." style="margin:0 0 8px 0;"></div>
+        <div class="form-group"><label>VIP LABEL</label><input type="text" id="vipLabel" placeholder="e.g. Elite Member..." style="margin:0 0 8px 0;"></div>
+        <div class="form-group"><label>EXPIRES (optional)</label><input type="date" id="vipExpiry" style="margin:0;"></div>
+        <div style="display:flex;gap:8px;margin-top:10px;">
+          <button class="btn btn-warning" onclick="grantVIP()" style="flex:1;"><i class="fas fa-crown"></i> Grant</button>
+          <button class="btn btn-danger" onclick="revokeVIP()" style="flex:1;"><i class="fas fa-ban"></i> Revoke</button>
+        </div>
+      </div>
+      <div class="admin-section">
+        <h3><i class="fas fa-list"></i> VIP Members</h3>
+        <div id="vipListContainer" style="margin-top:10px;"><div class="spinner"></div></div>
+      </div>
+    </div>
+
     <!-- System Tab -->
     <div id="systemTab" class="admin-content" style="display:none;">
       <div class="admin-section" style="grid-column:1/-1;">
@@ -754,17 +883,68 @@ body.light h1 {
   <div style="margin-top:90px;"></div>
 
   <h1 id="userGreeting">MOHAMMAD SAIFUL ISLAM</h1>
+  <div id="vipBadgeArea"></div>
   <div class="profile-badge" id="profileBadge">Honours 2nd Year (Management)</div>
-  <p style="font-style:italic;font-size:0.78rem;opacity:0.8;margin-bottom:16px;padding:0 16px;color:var(--text);" id="profileQuote">"Focus on your career, let the success make the noise."</p>
+  <p style="font-style:italic;font-size:0.78rem;opacity:0.8;margin-bottom:8px;padding:0 16px;color:var(--text);" id="profileQuote">"Focus on your career, let the success make the noise."</p>
+  <div class="typing-wrap"><span id="typingText"></span><span class="typing-cursor"></span></div>
 
-  <div class="section-title">Personal Profile</div>
-  <div class="grid">
+  <div class="section-title reveal">Personal Profile</div>
+  <div class="grid reveal">
     <div class="info"><i class="fas fa-user-tag"></i><span class="label">Nickname</span><span class="value" id="infoNickname">Saif</span></div>
     <div class="info"><i class="fas fa-cake-candles"></i><span class="label">Birthday</span><span class="value" id="infoBirthday">25 January</span></div>
     <div class="info"><i class="fas fa-briefcase"></i><span class="label">Status</span><span class="value" id="infoStatus">Study + Job</span></div>
     <div class="info"><i class="fas fa-code"></i><span class="label">Skills</span><span class="value" id="infoSkills">Bot & Web Hosting</span></div>
     <div class="info"><i class="fas fa-house"></i><span class="label">Home Town</span><span class="value" id="infoHometown">Gaibandha Sadar</span></div>
     <div class="info"><i class="fas fa-location-dot"></i><span class="label">Current</span><span class="value" id="infoCurrent">Gazipur , Dhaka</span></div>
+  </div>
+
+  <!-- ===== SKILLS ===== -->
+  <div class="section-title reveal">Skills & Tech</div>
+  <div class="skills-wrap reveal" id="skillsGrid">
+    <div class="skill-card"><span class="skill-emoji">⚡</span><div class="skill-name">JavaScript</div><div class="skill-bar"><div class="skill-fill" data-w="88"></div></div></div>
+    <div class="skill-card"><span class="skill-emoji">🤖</span><div class="skill-name">Bot Dev</div><div class="skill-bar"><div class="skill-fill" data-w="95"></div></div></div>
+    <div class="skill-card"><span class="skill-emoji">🌐</span><div class="skill-name">HTML/CSS</div><div class="skill-bar"><div class="skill-fill" data-w="85"></div></div></div>
+    <div class="skill-card"><span class="skill-emoji">🟢</span><div class="skill-name">Node.js</div><div class="skill-bar"><div class="skill-fill" data-w="80"></div></div></div>
+    <div class="skill-card"><span class="skill-emoji">🔥</span><div class="skill-name">Firebase</div><div class="skill-bar"><div class="skill-fill" data-w="78"></div></div></div>
+    <div class="skill-card"><span class="skill-emoji">🚀</span><div class="skill-name">Deployment</div><div class="skill-bar"><div class="skill-fill" data-w="82"></div></div></div>
+  </div>
+
+  <!-- ===== PROJECTS ===== -->
+  <div class="section-title reveal">Projects</div>
+  <div class="projects-grid reveal">
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title">🤖 Mikasa Bot</div>
+        <div class="project-actions">
+          <a class="project-btn" href="https://m.me/j/AbYhrDx5QWRQ54or/" target="_blank" title="Live"><i class="fab fa-facebook-messenger"></i></a>
+          <a class="project-btn" href="https://github.com/SAIFUL-404-STU" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <p class="project-desc">Premium Facebook Messenger bot on GoatBot framework. Economy, games, VIP management, AI integration, 50+ commands, strict moderation.</p>
+      <div class="project-tags"><span class="project-tag">GoatBot</span><span class="project-tag">Node.js</span><span class="project-tag">Firebase</span><span class="project-tag">Railway</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title">🌐 Saif Elite Portfolio</div>
+        <div class="project-actions">
+          <a class="project-btn" href="https://saiful-404-stu.github.io/Portofolio/" target="_blank" title="Live"><i class="fas fa-external-link-alt"></i></a>
+          <a class="project-btn" href="https://github.com/SAIFUL-404-STU/Portofolio" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <p class="project-desc">This portfolio — pure HTML/CSS/JS with plugin system, Firebase backend, admin panel, VIP system, fire effects, multi-page SPA, AI tools.</p>
+      <div class="project-tags"><span class="project-tag">HTML/CSS/JS</span><span class="project-tag">Firebase</span><span class="project-tag">Plugin System</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title">📥 AllDL API</div>
+        <div class="project-actions">
+          <a class="project-btn" href="https://alldl-0nok.onrender.com" target="_blank" title="Live API"><i class="fas fa-server"></i></a>
+          <a class="project-btn" href="https://github.com/SAIFUL-404-STU/Autodl-" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <p class="project-desc">Self-hosted media downloader API. Supports YouTube, Facebook, Instagram, TikTok via yt-dlp. Deployed on Render.com with streaming support.</p>
+      <div class="project-tags"><span class="project-tag">Node.js</span><span class="project-tag">Express</span><span class="project-tag">yt-dlp</span><span class="project-tag">Render</span></div>
+    </div>
   </div>
 
   <div class="section-title">Your Mikasa Baby</div>
@@ -788,7 +968,7 @@ body.light h1 {
     <a class="fb" id="socialFb" href="https://www.facebook.com/saiful.404.st" target="_blank"><i class="fab fa-facebook-f"></i></a>
     <a class="wa" id="socialWa" href="https://wa.me/8801823772045" target="_blank"><i class="fab fa-whatsapp"></i></a>
     <a class="ig" id="socialIg" href="https://www.instagram.com/saiful_404_st" target="_blank"><i class="fab fa-instagram"></i></a>
-    <a class="mail" id="socialMail" href="/cdn-cgi/l/email-protection#9fecfef6f9f2f0edecfaafabdff8f2fef6f3b1fcf0f2"><i class="fas fa-envelope"></i></a>
+    <a class="mail" id="socialMail" href="mailto:saifmorse04@gmail.com"><i class="fas fa-envelope"></i></a>
   </div>
 
   <div class="visitor-box">
@@ -844,9 +1024,9 @@ body.light h1 {
       <div><span class="c-label">Instagram</span><span class="c-value" id="contactIgVal">saiful_404_st</span></div>
       <i class="fas fa-chevron-right" style="margin-left:auto;color:var(--gold);opacity:0.5;"></i>
     </a>
-    <a class="contact-link" id="contactMailLink" href="/cdn-cgi/l/email-protection#9ceffdf5faf1f3eeeff9aca8dcfbf1fdf5f0b2fff3f1">
+    <a class="contact-link" id="contactMailLink" href="mailto:saifmorse04@gmail.com">
       <div class="c-icon" style="background:linear-gradient(135deg,#ea4335,#d02c1e);"><i class="fas fa-envelope" style="color:#fff;"></i></div>
-      <div><span class="c-label">Email</span><span class="c-value" id="contactEmailVal"><span class="__cf_email__" data-cfemail="e695878f808b89949583d6d2a6818b878f8ac885898b">[email&#160;protected]</span></span></div>
+      <div><span class="c-label">Email</span><span class="c-value" id="contactEmailVal">saifmorse04@gmail.com</span></div>
       <i class="fas fa-chevron-right" style="margin-left:auto;color:var(--gold);opacity:0.5;"></i>
     </a>
     <a class="contact-link" href="https://m.me/j/AbYhrDx5QWRQ54or/" target="_blank">
@@ -871,7 +1051,7 @@ body.light h1 {
 </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 // ===== CONFIG =====
 const ADMIN_CREDENTIALS = { email:"saifmorse04@gmail.com", password:"saiful@1" };
@@ -887,6 +1067,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 let currentUser=null, isAdminLoggedIn=false, adminSession=null, isLightMode=false;
+let musicEnabled=false, allUsersCache=[];
 let sheetsUrl='https://docs.google.com/spreadsheets/d/1YgOhoUvNbKBH1Um-WRvUE5GVkj1_PS77JQPt0hvbjUU/gviz/tq?tqx=out:csv';
 
 // ===== RAIN =====
@@ -944,11 +1125,52 @@ function createParticles(){
   }
 }
 
+// ===== TYPING EFFECT =====
+const typingPhrases=['Bot Developer 🤖','Web Creator 🌐','GoatBot Expert ⚡','Firebase Wizard 🔥','Node.js Dev 🟢','Saif Elite 👑'];
+let tIdx=0,tChar=0,tDeleting=false;
+function typeEffect(){
+  const el=document.getElementById('typingText');if(!el)return;
+  const phrase=typingPhrases[tIdx];
+  if(tDeleting)tChar--;else tChar++;
+  el.textContent=phrase.substring(0,tChar);
+  let delay=tDeleting?55:95;
+  if(!tDeleting&&tChar===phrase.length){delay=1800;tDeleting=true;}
+  if(tDeleting&&tChar===0){tDeleting=false;tIdx=(tIdx+1)%typingPhrases.length;delay=350;}
+  setTimeout(typeEffect,delay);
+}
+
+// ===== SCROLL REVEAL =====
+function initScrollReveal(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+  },{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+}
+
+// ===== SKILL BARS =====
+function animateSkillBars(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.skill-fill').forEach(b=>{b.style.width=b.dataset.w+'%';});
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.3});
+  const grid=document.getElementById('skillsGrid');
+  if(grid)obs.observe(grid);
+}
+
 // ===== INIT =====
 window.onload=function(){
   createParticles();createFireParticles();
   loadVisitorCount();checkExistingUser();loadProfileFromDB();
+  listenForBanner();listenForPushNotification();updateMsgBadge();
   setInterval(updateAdminBadge,30000);
+  setInterval(updateMsgBadge,60000);
+  setTimeout(typeEffect,800);
+  setTimeout(initScrollReveal,300);
+  setTimeout(animateSkillBars,400);
   document.getElementById('sysBrowser').textContent=navigator.userAgent.substring(0,40)+'...';
   document.getElementById('sysPlatform').textContent=navigator.platform||'Unknown';
   document.getElementById('sysScreen').textContent=screen.width+'x'+screen.height;
@@ -960,43 +1182,35 @@ function switchPage(page,el){
   document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.dropdown-item').forEach(i=>i.classList.remove('active'));
   document.getElementById(page+'Page').classList.add('active');
-  if(el) el.classList.add('active');
+  if(el)el.classList.add('active');
   closeMenu();
-  if(page==='tools') setTimeout(loadToolsPage,100);
+  if(page==='tools')setTimeout(loadToolsPage,100);
+  if(page==='home'){setTimeout(initScrollReveal,100);setTimeout(animateSkillBars,200);}
 }
 
 function loadToolsPage(){
+  const zone=document.getElementById('toolsPluginZone');
   const container=document.getElementById('toolsContainer');
-  const ids=['saif-dl-box','saif-weather-box','saif-lyrics-box','saif-currency-box','saif-qr-box','saif-text-box','saif-age-box','saif-dict-box','saif-enhance-box'];
+  const ids=['saif-gemini-box','saif-fbinfo-box','saif-dl-box','saif-weather-box','saif-lyrics-box','saif-currency-box','saif-qr-box','saif-text-box','saif-age-box','saif-dict-box','saif-enhance-box'];
   const boxes=ids.map(id=>document.getElementById(id)).filter(Boolean);
-  if(boxes.length===0){
-    container.innerHTML='<p style="text-align:center;opacity:0.55;color:var(--text);padding:40px;font-size:0.9rem;">No tools loaded. Check saif/manifest.json</p>';
+  if(boxes.length===0&&(!zone||zone.children.length<=1)){
+    if(container)container.innerHTML='<p style="text-align:center;opacity:0.55;color:var(--text);padding:40px;font-size:0.9rem;">No tools loaded. Check saif/manifest.json</p>';
     return;
   }
-  container.innerHTML='';
-  boxes.forEach(box=>{
-    box.style.marginTop='0';
-    container.appendChild(box);
-  });
+  if(container)container.innerHTML='';
+  boxes.forEach(box=>{box.style.marginTop='0';zone.appendChild(box);});
 }
 
-// Override plugin anchor — plugins inject into toolsPluginAnchor instead of homepage
-window.__saifPluginAnchor = null;
-function getSaifPluginAnchor(){
-  // Return tools page container as anchor for plugins
-  return document.getElementById('toolsPluginZone');
-}
+window.__saifPluginAnchor=null;
+function getSaifPluginAnchor(){return document.getElementById('toolsPluginZone');}
 
 // ===== HAMBURGER =====
-function toggleMenu(){
-  const menu=document.getElementById('dropdownMenu');
-  menu.classList.toggle('open');
-}
-function closeMenu(){ document.getElementById('dropdownMenu').classList.remove('open'); }
+function toggleMenu(){document.getElementById('dropdownMenu').classList.toggle('open');}
+function closeMenu(){document.getElementById('dropdownMenu').classList.remove('open');}
 document.addEventListener('click',e=>{
   const menu=document.getElementById('dropdownMenu');
   const btn=document.getElementById('hamburgerBtn');
-  if(!menu.contains(e.target)&&!btn.contains(e.target)) closeMenu();
+  if(!menu.contains(e.target)&&!btn.contains(e.target))closeMenu();
 });
 
 // ===== VISITOR COUNTER =====
@@ -1015,19 +1229,20 @@ function loadProfileFromDB(){
   db.ref('profile/').once('value').then(snap=>{
     const p=snap.val();if(!p)return;
     const upd=(id,val)=>{const el=document.getElementById(id);if(el&&val)el.innerText=val;};
-    if(p.name){upd('userGreeting',p.name);document.title=p.name+' | Elite Profile';}
+    if(p.name){upd('userGreeting',p.name);document.title=p.name+' | Elite Developer';}
     upd('profileBadge',p.title);upd('profileQuote',p.quote);
     upd('infoNickname',p.nickname);upd('infoBirthday',p.birthday);
     upd('infoStatus',p.status);upd('infoSkills',p.skills);
     upd('infoHometown',p.hometown);upd('infoCurrent',p.current);
     upd('mikasaText',p.mikasaText);
     if(p.avatar)document.getElementById('mainAvatar').src=p.avatar;
+    if(p.cover){const ci=document.getElementById('coverImage');if(ci)ci.src=p.cover;}
     if(p.mikasa)document.getElementById('mikasaImage').src=p.mikasa;
     if(p.bgMusic)document.getElementById('bgm').src=p.bgMusic;
     if(p.fb){document.getElementById('socialFb').href=p.fb;document.getElementById('contactFb').href=p.fb;document.getElementById('contactFbVal').innerText=p.fb.replace('https://www.facebook.com/','');}
     if(p.wa){const w='https://wa.me/'+p.wa;document.getElementById('socialWa').href=w;document.getElementById('contactWa').href=w;document.getElementById('contactWaVal').innerText='+'+p.wa;}
     if(p.ig){document.getElementById('socialIg').href=p.ig;document.getElementById('contactIg').href=p.ig;document.getElementById('contactIgVal').innerText=p.ig.replace('https://www.instagram.com/','');}
-    if(p.email){document.getElementById('socialMail').href='mailto:'+p.email;document.getElementById('contactMailLink').href='mailto:'+p.email;document.getElementById('contactEmailVal').innerText=p.email;}
+    if(p.email){const ml='mailto:'+p.email;document.getElementById('socialMail').href=ml;document.getElementById('contactMailLink').href=ml;document.getElementById('contactEmailVal').innerText=p.email;}
     if(p.sheetsUrl)sheetsUrl=p.sheetsUrl;
   });
 }
@@ -1036,15 +1251,15 @@ function loadProfileFromDB(){
 function checkExistingUser(){
   const saved=localStorage.getItem('saifUser');
   if(!saved){setTimeout(()=>{document.getElementById('namePopup').style.display='flex';},1200);}
-  else{currentUser=saved;logUserActivity(saved,'login');updateUserPresence(saved);}
+  else{currentUser=saved;logUserActivity(saved,'login');updateUserPresence(saved);checkUserVIPStatus(saved);}
 }
 function saveName(){
   const n=document.getElementById('userNameInput').value.trim();
   if(n&&n.length>=2){
     localStorage.setItem('saifUser',n);currentUser=n;
     document.getElementById('namePopup').style.display='none';
-    logUserActivity(n,'register');updateUserPresence(n);
-    showNotification('👋 Welcome '+n+'! You\'re now part of Saif Elite.','success');
+    logUserActivity(n,'register');updateUserPresence(n);checkUserVIPStatus(n);
+    showNotification('👋 Welcome '+n+'! Saif Elite te swagotom!','success');
   }else showNotification('⚠️ Min 2 characters please!','error');
 }
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.activeElement.id==='userNameInput')saveName();});
@@ -1088,6 +1303,8 @@ function switchTab(tab,event){
   if(tab==='dashboard')loadDashboardData();
   else if(tab==='users')loadUserManagement();
   else if(tab==='content')loadContentManagement();
+  else if(tab==='messages')loadMessages();
+  else if(tab==='vip')loadVIPList();
   else if(tab==='system'){
     document.getElementById('sysBrowser').textContent=navigator.userAgent.substring(0,40)+'...';
     document.getElementById('sysPlatform').textContent=navigator.platform||'Unknown';
@@ -1100,12 +1317,11 @@ function switchTab(tab,event){
 function loadAdminDashboard(){loadDashboardData();updateRecentActivities();updateAdminStats();}
 function loadDashboardData(){
   db.ref('users/').once('value').then(snap=>{
-    const u=snap.val();const total=u?Object.keys(u).length:0;
-    const active=u?Object.values(u).filter(x=>x.online).length:0;
-    document.getElementById('statActive').innerText=active;
+    const u=snap.val();const total=u?Object.keys(u).length:0;const active=u?Object.values(u).filter(x=>x.online).length:0;
+    const sa=document.getElementById('statActive');if(sa)sa.innerText=active;
     document.getElementById('adminNotification').innerText=total;
   });
-  db.ref('reactions/').once('value').then(snap=>{const r=snap.val();document.getElementById('statReactions').innerText=r?Object.keys(r).length:0;});
+  db.ref('reactions/').once('value').then(snap=>{const r=snap.val();const sr=document.getElementById('statReactions');if(sr)sr.innerText=r?Object.keys(r).length:0;});
 }
 function updateRecentActivities(){
   db.ref('activities/').limitToLast(10).once('value').then(snap=>{
@@ -1126,7 +1342,7 @@ function updateAdminBadge(){db.ref('users/').once('value').then(snap=>{const u=s
 function loadContentManagement(){
   db.ref('profile/').once('value').then(snap=>{
     const p=snap.val()||{};
-    const set=(id,val,def)=>{const el=document.getElementById(id);if(el)el.value=val||def||'';};
+    const set=(id,v,def)=>{const el=document.getElementById(id);if(el)el.value=v||def||'';};
     set('editName',p.name,'MOHAMMAD SAIFUL ISLAM');
     set('editTitle',p.title,'Honours 2nd Year (Management)');
     set('editQuote',p.quote,'"Focus on your career, let the success make the noise."');
@@ -1138,7 +1354,7 @@ function loadContentManagement(){
     set('editCurrent',p.current,'Gazipur , Dhaka');
     set('editAvatar',p.avatar,'https://i.imgur.com/58L6IZM.jpeg');
     set('editMikasa',p.mikasa,'https://i.imgur.com/igiRnE0.jpeg');
-    set('editMikasaText',p.mikasaText,'Mikasa Bot is everyone\'s favorite Messenger GOAT bot.');
+    set('editMikasaText',p.mikasaText,"Mikasa Bot is everyone's favorite Messenger GOAT bot.");
     set('editBgMusic',p.bgMusic,'https://files.catbox.moe/oplblr.opus');
     set('editFb',p.fb,'https://www.facebook.com/saiful.404.st');
     set('editWa',p.wa,'8801823772045');
@@ -1147,7 +1363,6 @@ function loadContentManagement(){
     const su=document.getElementById('editSheetsUrl');if(su)su.value=p.sheetsUrl||sheetsUrl;
   });
 }
-
 function updateProfile(){
   const g=id=>{const el=document.getElementById(id);return el?el.value.trim():'';};
   const d={
@@ -1160,7 +1375,7 @@ function updateProfile(){
   };
   db.ref('profile/').set(d).then(()=>{
     const upd=(id,val)=>{const el=document.getElementById(id);if(el&&val)el.innerText=val;};
-    if(d.name){upd('userGreeting',d.name);document.title=d.name+' | Elite Profile';}
+    if(d.name){upd('userGreeting',d.name);document.title=d.name+' | Elite Developer';}
     upd('profileBadge',d.title);upd('profileQuote',d.quote);
     upd('infoNickname',d.nickname);upd('infoBirthday',d.birthday);
     upd('infoStatus',d.status);upd('infoSkills',d.skills);
@@ -1172,28 +1387,32 @@ function updateProfile(){
     if(d.fb){document.getElementById('socialFb').href=d.fb;document.getElementById('contactFb').href=d.fb;document.getElementById('contactFbVal').innerText=d.fb.replace('https://www.facebook.com/','');}
     if(d.wa){const w='https://wa.me/'+d.wa;document.getElementById('socialWa').href=w;document.getElementById('contactWa').href=w;document.getElementById('contactWaVal').innerText='+'+d.wa;}
     if(d.ig){document.getElementById('socialIg').href=d.ig;document.getElementById('contactIg').href=d.ig;document.getElementById('contactIgVal').innerText=d.ig.replace('https://www.instagram.com/','');}
-    if(d.email){document.getElementById('socialMail').href='mailto:'+d.email;document.getElementById('contactMailLink').href='mailto:'+d.email;document.getElementById('contactEmailVal').innerText=d.email;}
+    if(d.email){const ml='mailto:'+d.email;document.getElementById('socialMail').href=ml;document.getElementById('contactMailLink').href=ml;document.getElementById('contactEmailVal').innerText=d.email;}
     showNotification('✅ Profile updated!','success');
     logUserActivity('ADMIN','update_profile',d);
   }).catch(err=>showNotification('❌ Failed: '+err.message,'error'));
 }
-
 function updateSheetsUrl(){
-  const url=document.getElementById('editSheetsUrl')?.value.trim();
-  if(!url)return;sheetsUrl=url;
-  db.ref('profile/sheetsUrl').set(url).then(()=>showNotification('✅ Sheets URL updated!','success'));
+  const url=document.getElementById('editSheetsUrl')?.value.trim();if(!url)return;
+  sheetsUrl=url;db.ref('profile/sheetsUrl').set(url).then(()=>showNotification('✅ Sheets URL updated!','success'));
 }
 
 // ===== USER MANAGEMENT =====
 function loadUserManagement(){
   db.ref('users/').once('value').then(snap=>{
     const u=snap.val();const table=document.getElementById('userManagementTable');table.innerHTML='';
-    if(u)Object.entries(u).forEach(([key,user])=>{
-      const row=table.insertRow();
-      const sc=user.online?'badge-success':'badge-danger';
-      row.innerHTML=`<td><strong>${user.name||key.substring(0,8)}</strong></td><td>${user.device||'?'}</td><td><span class="badge ${sc}">${user.online?'Online':'Offline'}</span></td><td>${user.lastActive?new Date(user.lastActive).toLocaleString():'N/A'}</td><td><button class="btn btn-danger" style="padding:6px 10px;font-size:0.7rem;" onclick="deleteUser('${key}')"><i class="fas fa-trash"></i></button></td>`;
-    });
+    if(u){
+      allUsersCache=Object.entries(u);
+      allUsersCache.forEach(([key,user])=>{
+        const row=table.insertRow();const sc=user.online?'badge-success':'badge-danger';
+        row.innerHTML=`<td><strong>${user.name||key.substring(0,8)}</strong></td><td>${user.device||'?'}</td><td><span class="badge ${sc}">${user.online?'Online':'Offline'}</span></td><td>${user.lastActive?new Date(user.lastActive).toLocaleString():'N/A'}</td><td><button class="btn btn-warning" style="padding:6px 10px;font-size:0.7rem;" onclick="quickGrantVIP('${user.name||key}')"><i class="fas fa-crown"></i></button> <button class="btn btn-danger" style="padding:6px 10px;font-size:0.7rem;" onclick="deleteUser('${key}')"><i class="fas fa-trash"></i></button></td>`;
+      });
+    }
   });
+}
+function quickGrantVIP(name){
+  Swal.fire({title:`Grant VIP to ${name}?`,input:'text',inputPlaceholder:'VIP Label (e.g. Elite Member)',icon:'question',showCancelButton:true,confirmButtonColor:'#ffd700',confirmButtonText:'Grant 👑'})
+  .then(r=>{if(r.isConfirmed){db.ref('vip/'+encodeURIComponent(name)).set({name,label:r.value||'VIP Member',grantedAt:new Date().toISOString(),active:true});showNotification(`👑 ${name} is now VIP!`,'success');}});
 }
 function searchUsers(){
   const q=document.getElementById('searchUser').value.toLowerCase();
@@ -1206,6 +1425,146 @@ function deleteUser(key){
 function deleteInactiveUsers(){
   Swal.fire({title:'Clean Inactive?',text:'Remove 30+ days inactive users',icon:'warning',showCancelButton:true,confirmButtonColor:'#ff416c',cancelButtonColor:'#ffd700',confirmButtonText:'Clean!'})
   .then(r=>{if(r.isConfirmed)showNotification('🗑️ Cleaned!','success');});
+}
+
+// ===== EMERGENCY BANNER =====
+function sendEmergencyBanner(){
+  const msg=document.getElementById('bannerMsg').value.trim();if(!msg){showNotification('Message likhoo!','error');return;}
+  db.ref('system/banner').set({text:msg,active:true,sentAt:new Date().toISOString()}).then(()=>{
+    showNotification('🚨 Banner sent!','success');
+    document.getElementById('bannerPreviewText').textContent=msg;
+    document.getElementById('bannerPreview').style.display='block';
+  });
+}
+function clearEmergencyBanner(){
+  db.ref('system/banner').set({active:false}).then(()=>{
+    showNotification('✅ Banner cleared!','success');
+    document.getElementById('bannerPreview').style.display='none';
+    document.getElementById('emergencyBanner').classList.remove('active');
+    document.body.classList.remove('banner-active');
+  });
+}
+function dismissBanner(){document.getElementById('emergencyBanner').classList.remove('active');document.body.classList.remove('banner-active');}
+function listenForBanner(){
+  db.ref('system/banner').on('value',snap=>{
+    const d=snap.val();const banner=document.getElementById('emergencyBanner');
+    if(d&&d.active&&d.text){document.getElementById('emergencyBannerText').textContent=d.text;banner.classList.add('active');document.body.classList.add('banner-active');}
+    else{banner.classList.remove('active');document.body.classList.remove('banner-active');}
+  });
+}
+
+// ===== PUSH NOTIFICATION =====
+function sendPushNotification(){
+  const title=document.getElementById('pushTitle').value.trim();
+  const msg=document.getElementById('pushMsg').value.trim();
+  const type=document.getElementById('pushType').value;
+  if(!title||!msg){showNotification('Title ar message dono likhoo!','error');return;}
+  db.ref('system/pushNotification').set({title,message:msg,type,active:true,sentAt:new Date().toISOString()}).then(()=>{
+    showNotification('📢 Notification sent!','success');
+    setTimeout(()=>db.ref('system/pushNotification/active').set(false),10000);
+  });
+}
+function listenForPushNotification(){
+  db.ref('system/pushNotification').on('value',snap=>{
+    const d=snap.val();
+    if(d&&d.active&&d.message){
+      const seen=localStorage.getItem('lastPush');if(seen===d.sentAt)return;
+      localStorage.setItem('lastPush',d.sentAt);showPushNotificationUI(d);
+    }
+  });
+}
+function showPushNotificationUI(data){
+  const el=document.createElement('div');
+  el.style.cssText='position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:linear-gradient(160deg,rgba(20,20,20,0.99),rgba(8,8,8,0.99));border:1.5px solid rgba(255,215,0,0.3);border-radius:22px;padding:28px;z-index:999998;max-width:330px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.8);';
+  const icons={success:'✅',error:'🚨',info:'📢',warning:'⚠️'};
+  el.innerHTML=`<div style="font-size:2rem;margin-bottom:10px;">${icons[data.type]||'📢'}</div><h3 style="color:var(--gold);font-family:'Syne',sans-serif;margin-bottom:8px;">${data.title}</h3><p style="font-size:0.85rem;opacity:0.8;margin-bottom:18px;line-height:1.5;">${data.message}</p><button onclick="this.parentElement.remove()" style="background:linear-gradient(135deg,var(--fire1),var(--fire2));border:none;color:#000;padding:11px 26px;border-radius:11px;font-weight:900;cursor:pointer;font-family:'Outfit',sans-serif;">GOT IT 👑</button>`;
+  document.body.appendChild(el);
+  setTimeout(()=>{if(el.parentElement)el.remove();},12000);
+}
+
+// ===== MESSAGES =====
+function loadMessages(){
+  const container=document.getElementById('messagesContainer');if(!container)return;
+  container.innerHTML='<div style="text-align:center;padding:20px;opacity:0.5;"><div class="spinner"></div><p style="margin-top:10px;">Loading...</p></div>';
+  db.ref('messages/').orderByChild('timestamp').limitToLast(50).once('value').then(snap=>{
+    const msgs=snap.val();
+    if(!msgs){container.innerHTML='<p style="text-align:center;opacity:0.5;padding:20px;">No messages yet baby!</p>';return;}
+    const items=Object.entries(msgs).reverse();
+    container.innerHTML=items.map(([key,msg])=>`
+      <div class="msg-card" id="msgcard-${key}">
+        ${!msg.read?'<div class="msg-unread"></div>':''}
+        <div class="msg-name">👤 ${msg.name||'Unknown'}</div>
+        <div class="msg-text">${msg.message||''}</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:5px;">
+          <span class="msg-time">🕐 ${msg.timestamp?new Date(msg.timestamp).toLocaleString():'N/A'}</span>
+          <div style="display:flex;gap:5px;">
+            <button onclick="markMsgRead('${key}')" style="background:rgba(37,211,102,0.1);border:1px solid #25D366;color:#25D366;padding:4px 9px;border-radius:7px;cursor:pointer;font-size:0.65rem;font-weight:700;font-family:'Outfit',sans-serif;">✓ Read</button>
+            <button onclick="deleteMsg('${key}')" style="background:rgba(255,65,108,0.1);border:1px solid #ff416c;color:#ff416c;padding:4px 9px;border-radius:7px;cursor:pointer;font-size:0.65rem;font-weight:700;font-family:'Outfit',sans-serif;">🗑</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+    items.forEach(([key])=>db.ref(`messages/${key}/read`).set(true));
+    updateMsgBadge();
+  });
+}
+function markMsgRead(key){db.ref(`messages/${key}/read`).set(true);const el=document.getElementById(`msgcard-${key}`);if(el){const dot=el.querySelector('.msg-unread');if(dot)dot.remove();}}
+function deleteMsg(key){db.ref(`messages/${key}`).remove().then(()=>{const el=document.getElementById(`msgcard-${key}`);if(el)el.remove();showNotification('🗑️ Deleted!','success');});}
+function clearAllMessages(){
+  Swal.fire({title:'Clear all messages?',icon:'warning',showCancelButton:true,confirmButtonColor:'#ff416c',cancelButtonColor:'#ffd700',confirmButtonText:'Clear!'})
+  .then(r=>{if(r.isConfirmed)db.ref('messages/').remove().then(()=>{const c=document.getElementById('messagesContainer');if(c)c.innerHTML='<p style="text-align:center;opacity:0.5;padding:20px;">No messages yet baby!</p>';showNotification('✅ Cleared!','success');});});
+}
+function updateMsgBadge(){
+  db.ref('messages/').once('value').then(snap=>{
+    const msgs=snap.val();if(!msgs)return;
+    const unread=Object.values(msgs).filter(m=>!m.read).length;
+    const badge=document.getElementById('msgBadge');
+    if(badge){if(unread>0){badge.style.display='inline';badge.textContent=unread;}else badge.style.display='none';}
+  });
+}
+
+// ===== VIP SYSTEM =====
+function grantVIP(){
+  const name=document.getElementById('vipUserName').value.trim();
+  const label=document.getElementById('vipLabel').value.trim()||'VIP Member';
+  const expiry=document.getElementById('vipExpiry').value;
+  if(!name){showNotification('User naam likhoo!','error');return;}
+  const vd={name,label,grantedAt:new Date().toISOString(),active:true};
+  if(expiry)vd.expiresAt=expiry;
+  db.ref('vip/'+encodeURIComponent(name)).set(vd).then(()=>{showNotification(`👑 ${name} is now VIP!`,'success');loadVIPList();});
+}
+function revokeVIP(){
+  const name=document.getElementById('vipUserName').value.trim();if(!name){showNotification('User naam likhoo!','error');return;}
+  db.ref('vip/'+encodeURIComponent(name)).remove().then(()=>{showNotification(`✅ VIP revoked!`,'success');loadVIPList();});
+}
+function loadVIPList(){
+  const container=document.getElementById('vipListContainer');if(!container)return;
+  db.ref('vip/').once('value').then(snap=>{
+    const vips=snap.val();
+    if(!vips){container.innerHTML='<p style="opacity:0.5;text-align:center;padding:15px;">No VIP members yet</p>';return;}
+    container.innerHTML=Object.entries(vips).map(([key,v])=>`
+      <div class="user-detail-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <p style="font-weight:900;color:var(--gold);margin:0 0 5px 0;">👑 ${v.name}</p>
+            <span style="background:linear-gradient(135deg,#ffd700,#ff9900);color:#000;padding:3px 9px;border-radius:8px;font-size:0.65rem;font-weight:900;">${v.label||'VIP'}</span>
+            ${v.expiresAt?`<p style="font-size:0.62rem;opacity:0.55;margin:4px 0 0 0;">Expires: ${new Date(v.expiresAt).toLocaleDateString()}</p>`:''}
+          </div>
+          <button onclick="db.ref('vip/'+encodeURIComponent('${v.name}')).remove().then(()=>{showNotification('Revoked!','success');loadVIPList();})" style="background:rgba(255,65,108,0.1);border:1px solid #ff416c;color:#ff416c;padding:6px 11px;border-radius:9px;cursor:pointer;font-size:0.72rem;font-weight:700;font-family:'Outfit',sans-serif;"><i class="fas fa-ban"></i></button>
+        </div>
+      </div>
+    `).join('');
+  });
+}
+function checkUserVIPStatus(userName){
+  if(!userName)return;
+  db.ref('vip/'+encodeURIComponent(userName)).once('value').then(snap=>{
+    const vip=snap.val();const ba=document.getElementById('vipBadgeArea');if(!ba)return;
+    if(vip&&vip.active){
+      if(vip.expiresAt&&new Date(vip.expiresAt)<new Date()){db.ref('vip/'+encodeURIComponent(userName)+'/active').set(false);ba.innerHTML='';return;}
+      ba.innerHTML=`<div class="vip-badge"><i class="fas fa-crown"></i> ${vip.label||'VIP Member'}</div>`;
+    }else{ba.innerHTML='';}
+  });
 }
 
 // ===== ACTIVITY LOG =====
@@ -1236,7 +1595,7 @@ function exportData(){
 function clearCache(){localStorage.clear();showNotification('🧹 Cache cleared!','success');setTimeout(()=>location.reload(),1500);}
 function emergencyLock(){
   Swal.fire({title:'🚨 Emergency Lock',text:'Lock for all non-admin users',icon:'warning',showCancelButton:true,confirmButtonColor:'#ff416c',cancelButtonColor:'#ffd700',confirmButtonText:'Lock!'})
-  .then(r=>{if(r.isConfirmed){db.ref('system/lockdown').set({active:true,by:adminSession.email,at:new Date().toISOString()});showNotification('🔒 Lockdown activated!','error');}});
+  .then(r=>{if(r.isConfirmed){db.ref('system/lockdown').set({active:true,at:new Date().toISOString()});showNotification('🔒 Lockdown activated!','error');}});
 }
 
 // ===== NOTIFICATION =====
@@ -1265,16 +1624,16 @@ function toggleStory(){
 }
 async function loadStories(){
   const div=document.getElementById('stories');
-  div.innerHTML='<div class="spinner"></div><p style="text-align:center;opacity:0.6;color:var(--text);">Loading stories...</p>';
+  div.innerHTML='<div class="spinner"></div><p style="text-align:center;opacity:0.65;color:var(--text);">Loading stories...</p>';
   try{
     const res=await fetch(sheetsUrl);const text=await res.text();
     const rows=text.split('\n').slice(1);
     div.innerHTML=rows.map((row,i)=>{
       if(!row.trim())return'';const c=row.replace(/"/g,'');
-      return`<div class="story-card"><p style="font-size:0.85rem;line-height:1.6;">${c}</p><div class="react-box"><button class="react-btn" onclick="addReact(${i},'love')">❤️ <span id="love-${i}">0</span></button><button class="react-btn" onclick="addReact(${i},'sad')">😢 <span id="sad-${i}">0</span></button><button class="react-btn" onclick="addReact(${i},'care')">🥰 <span id="care-${i}">0</span></button></div></div>`;
+      return`<div class="story-card"><p style="font-size:0.88rem;line-height:1.6;">${c}</p><div class="react-box"><button class="react-btn" onclick="addReact(${i},'love')">❤️ <span id="love-${i}">0</span></button><button class="react-btn" onclick="addReact(${i},'sad')">😢 <span id="sad-${i}">0</span></button><button class="react-btn" onclick="addReact(${i},'care')">🥰 <span id="care-${i}">0</span></button></div></div>`;
     }).join('');
     rows.forEach((_,i)=>syncCounts(i));
-  }catch(e){div.innerHTML='<p style="text-align:center;opacity:0.6;color:var(--text);">Failed to load stories.</p>';}
+  }catch(e){div.innerHTML='<p style="text-align:center;opacity:0.65;color:var(--text);">Failed to load stories.</p>';}
 }
 function addReact(id,type){
   if(!currentUser){showNotification('Enter your name first!','error');return;}
@@ -1288,21 +1647,15 @@ function syncCounts(id){
 }
 
 // ===== MUSIC =====
-let musicEnabled = false;
 function toggleMusic(){
   const a=document.getElementById('bgm');
-  const btn=document.getElementById('musicBtn');
   musicEnabled=!musicEnabled;
-  if(musicEnabled){
-    a.volume=0.25;a.play().catch(()=>{musicEnabled=false;updateMusicBtn();});
-  }else{
-    a.pause();
-  }
+  if(musicEnabled){a.volume=0.25;a.play().catch(()=>{musicEnabled=false;updateMusicBtn();});}
+  else{a.pause();}
   updateMusicBtn();
 }
 function updateMusicBtn(){
-  const btn=document.getElementById('musicBtn');
-  if(!btn)return;
+  const btn=document.getElementById('musicBtn');if(!btn)return;
   btn.innerHTML=musicEnabled
     ?'<i class="fas fa-volume-high" style="color:var(--gold);"></i>'
     :'<i class="fas fa-volume-xmark" style="color:var(--gold);opacity:0.5;"></i>';
@@ -1326,7 +1679,6 @@ function sendContactMessage(){
 // ===== EVENT LISTENERS =====
 setInterval(()=>{if(isAdminLoggedIn&&adminSession)localStorage.setItem('adminSession',JSON.stringify(adminSession));},60000);
 window.addEventListener('beforeunload',()=>{if(currentUser)db.ref('users/'+encodeURIComponent(currentUser)).update({online:false});});
-</script>
 
 <!-- PLUGIN ANCHOR OVERRIDE — redirect all plugins to tools page -->
 <script>
@@ -1377,4 +1729,14 @@ window.getSaifToolZone = function(){
     const res=await fetch('./saif/manifest.json?v='+Date.now());
     if(!res.ok)throw new Error('manifest not found');
     const{plugins}=await res.json();
-    for(const
+    for(const file of plugins){
+      const s=document.createElement('script');
+      s.src=`./saif/${file}?v=${Date.now()}`;
+      document.body.appendChild(s);
+      console.log('[Saif Plugin] '+file+' ✅');
+    }
+  }catch(e){console.warn('[Saif Plugin] '+e.message);}
+})();
+</script>
+</body>
+</html>
