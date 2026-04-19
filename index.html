@@ -3,12 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mohammad Saiful Islam | Elite Profile</title>
+<title>Mohammad Saiful Islam | Bot Developer & Web Creator</title>
+<meta name="description" content="Mohammad Saiful Islam — Elite Bot Developer, GoatBot Expert & Web Creator from Bangladesh.">
+<meta name="keywords" content="Bot Developer, GoatBot, Node.js, Firebase, Web Developer, Bangladesh">
+<meta property="og:title" content="Mohammad Saiful Islam | Elite Developer">
+<meta property="og:description" content="Bot Developer & Web Creator from Bangladesh">
+<meta property="og:image" content="https://i.imgur.com/58L6IZM.jpeg">
+<meta name="theme-color" content="#ffd700">
 
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
 <style>
@@ -572,9 +578,119 @@ body.banner-active .wrap { margin-top:142px !important; }
   .grid { grid-template-columns:1fr; }
   .panel { width:100%; }
 }
+
+/* ================================================================
+   $1000 UPGRADE — PREMIUM ADDITIONS
+================================================================ */
+
+/* Custom Cursor */
+body { cursor:none; }
+.cursor-dot,.cursor-ring { position:fixed; pointer-events:none; z-index:999999; transform:translate(-50%,-50%); border-radius:50%; }
+.cursor-dot { width:7px; height:7px; background:var(--gold); transition:transform .08s; }
+.cursor-ring { width:34px; height:34px; border:1.5px solid rgba(255,215,0,.5); z-index:999998; transition:width .18s,height .18s,border-color .18s; }
+.cursor-ring.hov { width:50px; height:50px; border-color:var(--gold); }
+@media(hover:none){ .cursor-dot,.cursor-ring{ display:none; } body{ cursor:auto; } }
+
+/* Preloader */
+#preloader { position:fixed; inset:0; background:var(--bg); z-index:999997; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:22px; transition:opacity .6s,visibility .6s; }
+#preloader.hide { opacity:0; visibility:hidden; pointer-events:none; }
+.pre-logo { font-family:'Syne',sans-serif; font-size:2.5rem; font-weight:800; background:linear-gradient(90deg,var(--fire1),var(--gold),var(--fire1)); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shine 1.4s linear infinite; }
+.pre-bar { width:200px; height:2px; background:rgba(255,215,0,.1); border-radius:2px; overflow:hidden; }
+.pre-fill { height:100%; background:linear-gradient(90deg,var(--fire1),var(--gold)); animation:preLoad 1.7s cubic-bezier(.4,0,.2,1) forwards; }
+@keyframes preLoad { from{width:0} to{width:100%} }
+
+/* Noise */
+.noise { position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.022; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* Fullscreen Menu */
+.full-menu { position:fixed; inset:0; z-index:850; background:rgba(5,5,5,.97); backdrop-filter:blur(28px); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; opacity:0; visibility:hidden; transition:opacity .3s,visibility .3s; }
+body.light .full-menu { background:rgba(245,245,240,.97); }
+.full-menu.open { opacity:1; visibility:visible; }
+.full-menu-link { font-family:'Syne',sans-serif; font-size:clamp(2rem,6vw,2.8rem); font-weight:800; cursor:none; color:rgba(255,255,255,.3); transition:color .2s,transform .2s; display:flex; align-items:center; gap:18px; padding:10px 24px; text-decoration:none; }
+body.light .full-menu-link { color:rgba(0,0,0,.3); }
+.full-menu-link:hover { color:var(--gold); transform:translateX(10px); }
+.menu-num { font-family:'JetBrains Mono',monospace; font-size:.9rem; font-weight:400; opacity:.35; }
+.menu-sep { width:1px; height:48px; background:rgba(255,215,0,.1); }
+
+/* Hamburger animated */
+.hamburger-btn { display:flex !important; flex-direction:column; gap:5px; }
+.hamburger-btn span { display:block; width:18px; height:1.5px; background:var(--gold); border-radius:1px; transition:all .28s; }
+.hamburger-btn.open span:nth-child(1) { transform:rotate(45deg) translate(4.5px,4.5px); }
+.hamburger-btn.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+.hamburger-btn.open span:nth-child(3) { transform:rotate(-45deg) translate(4.5px,-4.5px); }
+
+/* Hero Stats */
+.hero-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(255,215,0,.08); border-radius:16px; overflow:hidden; margin:16px 0; }
+.hstat { background:var(--card); padding:14px 10px; text-align:center; transition:background .25s; }
+.hstat:hover { background:rgba(255,215,0,.08); }
+.hstat-n { font-family:'Syne',sans-serif; font-size:1.55rem; font-weight:800; color:var(--gold); line-height:1; }
+.hstat-l { font-size:.6rem; opacity:.42; margin-top:5px; letter-spacing:1px; text-transform:uppercase; }
+
+/* CTA Buttons */
+.hero-ctas { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin:14px 0 16px; }
+.cta-btn { padding:12px 24px; border-radius:13px; font-weight:700; font-size:.88rem; cursor:none; transition:all .25s; display:inline-flex; align-items:center; gap:8px; font-family:'Outfit',sans-serif; text-decoration:none; }
+.cta-fire { background:linear-gradient(135deg,var(--fire1),var(--fire2)); color:#000; box-shadow:0 6px 20px rgba(255,102,0,.3); }
+.cta-fire:hover { transform:translateY(-3px); box-shadow:0 12px 28px rgba(255,102,0,.5); }
+.cta-ghost { background:transparent; border:1.5px solid rgba(255,215,0,.32); color:var(--gold); }
+.cta-ghost:hover { background:rgba(255,215,0,.1); border-color:var(--gold); transform:translateY(-3px); }
+
+/* Skill cards enhanced */
+.skill-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--fire1),var(--gold)); transform:scaleX(0); transition:transform .35s; transform-origin:left; }
+.skill-card:hover::after { transform:scaleX(1); }
+
+/* Projects enhanced */
+.proj-grid { display:grid; gap:14px; margin-bottom:6px; }
+.proj-card { background:rgba(255,215,0,.03); border:1.5px solid rgba(255,215,0,.1); border-radius:20px; padding:20px; transition:all .3s; position:relative; overflow:hidden; }
+.proj-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--fire1),var(--gold),transparent); opacity:0; transition:opacity .3s; }
+.proj-card:hover { border-color:rgba(255,215,0,.38); transform:translateY(-5px); box-shadow:0 20px 50px rgba(255,100,0,.1); }
+.proj-card:hover::before { opacity:1; }
+.proj-head { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:9px; }
+.proj-title { font-family:'Syne',sans-serif; font-size:1rem; font-weight:800; color:var(--gold); }
+.proj-btns { display:flex; gap:7px; flex-shrink:0; }
+.proj-btn { width:33px; height:33px; border-radius:9px; display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,215,0,.2); background:rgba(255,215,0,.07); color:var(--gold); font-size:.85rem; transition:all .25s; text-decoration:none; cursor:none; }
+.proj-btn:hover { background:var(--gold); color:#000; transform:scale(1.1); }
+.proj-desc { font-size:.8rem; line-height:1.65; opacity:.72; margin-bottom:11px; color:var(--text); }
+.proj-tags { display:flex; gap:5px; flex-wrap:wrap; }
+.proj-tag { padding:3px 9px; border-radius:7px; font-size:.62rem; font-weight:700; background:rgba(255,215,0,.1); color:var(--gold); border:1px solid rgba(255,215,0,.2); }
+.proj-live { display:inline-flex; align-items:center; gap:5px; font-size:.63rem; font-weight:700; padding:3px 9px; border-radius:7px; margin-bottom:9px; background:rgba(37,211,102,.1); color:#25D366; border:1px solid rgba(37,211,102,.25); }
+.proj-live::before { content:''; width:6px; height:6px; border-radius:50%; background:#25D366; animation:liveDot 2s infinite; }
+@keyframes liveDot { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+/* Section labels */
+.sec-label { font-family:'JetBrains Mono',monospace; font-size:.7rem; color:var(--fire2); letter-spacing:2px; text-transform:uppercase; margin-bottom:6px; opacity:.75; display:block; }
+.sec-h { font-family:'Syne',sans-serif; font-size:1.45rem; font-weight:800; margin-bottom:16px; }
+
+/* Site footer */
+.site-footer { margin-top:28px; padding:20px; background:rgba(0,0,0,.35); border:1px solid var(--footer-border); border-radius:16px; text-align:center; cursor:none; transition:all .25s; }
+.site-footer:hover { border-color:var(--gold); }
+.footer-main { font-size:.67rem; opacity:.45; font-weight:900; letter-spacing:2px; text-transform:uppercase; }
+.footer-copy { font-size:.6rem; opacity:.25; margin-top:7px; font-family:'JetBrains Mono',monospace; }
+
+/* Card cover upgrade */
+.card-cover { position:relative; width:calc(100% + 48px); margin:-16px -24px 0; height:148px; overflow:hidden; border-radius:36px 36px 0 0; }
+.card-cover img { width:100%; height:100%; object-fit:cover; display:block; filter:brightness(.72) saturate(1.2); }
+.card-cover::after { content:''; position:absolute; inset:0; background:linear-gradient(to bottom,rgba(255,80,0,.12),rgba(8,8,8,.88)); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width:3px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:var(--fire1); border-radius:3px; }
 </style>
 </head>
 <body>
+
+<!-- Cursor -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Preloader -->
+<div id="preloader">
+  <div class="pre-logo">SAIF ELITE</div>
+  <div class="pre-bar"><div class="pre-fill"></div></div>
+</div>
+
+<!-- Noise -->
+<div class="noise"></div>
 
 <!-- Emergency Banner -->
 <div class="emergency-banner" id="emergencyBanner">
@@ -620,10 +736,19 @@ body.banner-active .wrap { margin-top:142px !important; }
   <div class="nav-logo">SAIF ELITE</div>
 
   <!-- Right Hamburger -->
-  <div class="hamburger-btn" onclick="toggleMenu()" id="hamburgerBtn">
-    <i class="fas fa-bars" style="color:var(--gold);"></i>
+  <div class="hamburger-btn ctrl-btn" onclick="toggleFullMenu()" id="hamburgerBtn">
+    <span></span><span></span><span></span>
   </div>
 </nav>
+
+<!-- Fullscreen Menu -->
+<div class="full-menu" id="fullMenu">
+  <a class="full-menu-link" onclick="switchPage('home',null);closeFullMenu()"><span class="menu-num">01</span>Home</a>
+  <div class="menu-sep"></div>
+  <a class="full-menu-link" onclick="switchPage('tools',null);closeFullMenu()"><span class="menu-num">02</span>Tools</a>
+  <div class="menu-sep"></div>
+  <a class="full-menu-link" onclick="switchPage('contact',null);closeFullMenu()"><span class="menu-num">03</span>Contact</a>
+</div>
 
 <!-- Dropdown Menu -->
 <div class="dropdown-menu" id="dropdownMenu">
@@ -888,6 +1013,19 @@ body.banner-active .wrap { margin-top:142px !important; }
   <p style="font-style:italic;font-size:0.78rem;opacity:0.8;margin-bottom:8px;padding:0 16px;color:var(--text);" id="profileQuote">"Focus on your career, let the success make the noise."</p>
   <div class="typing-wrap"><span id="typingText"></span><span class="typing-cursor"></span></div>
 
+  <!-- Hero Stats -->
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-n">3+</div><div class="hstat-l">Projects</div></div>
+    <div class="hstat"><div class="hstat-n" id="visitorCount">...</div><div class="hstat-l">Visitors</div></div>
+    <div class="hstat"><div class="hstat-n">50+</div><div class="hstat-l">Bot Cmds</div></div>
+  </div>
+
+  <!-- CTA Buttons -->
+  <div class="hero-ctas">
+    <a class="cta-btn cta-fire" href="https://m.me/j/AbYhrDx5QWRQ54or/" target="_blank"><i class="fab fa-facebook-messenger"></i>Join Mikasa</a>
+    <a class="cta-btn cta-ghost" href="https://github.com/SAIFUL-404-STU" target="_blank"><i class="fab fa-github"></i>GitHub</a>
+  </div>
+
   <div class="section-title reveal">Personal Profile</div>
   <div class="grid reveal">
     <div class="info"><i class="fas fa-user-tag"></i><span class="label">Nickname</span><span class="value" id="infoNickname">Saif</span></div>
@@ -899,7 +1037,8 @@ body.banner-active .wrap { margin-top:142px !important; }
   </div>
 
   <!-- ===== SKILLS ===== -->
-  <div class="section-title reveal">Skills & Tech</div>
+  <div class="section-title reveal"><span class="sec-label">Expertise</span></div>
+  <div class="sec-h reveal" data-delay="1">Skills & Tech Stack</div>
   <div class="skills-wrap reveal" id="skillsGrid">
     <div class="skill-card"><span class="skill-emoji">⚡</span><div class="skill-name">JavaScript</div><div class="skill-bar"><div class="skill-fill" data-w="88"></div></div></div>
     <div class="skill-card"><span class="skill-emoji">🤖</span><div class="skill-name">Bot Dev</div><div class="skill-bar"><div class="skill-fill" data-w="95"></div></div></div>
@@ -910,40 +1049,44 @@ body.banner-active .wrap { margin-top:142px !important; }
   </div>
 
   <!-- ===== PROJECTS ===== -->
-  <div class="section-title reveal">Projects</div>
-  <div class="projects-grid reveal">
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-title">🤖 Mikasa Bot</div>
-        <div class="project-actions">
-          <a class="project-btn" href="https://m.me/j/AbYhrDx5QWRQ54or/" target="_blank" title="Live"><i class="fab fa-facebook-messenger"></i></a>
-          <a class="project-btn" href="https://github.com/SAIFUL-404-STU" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+  <div class="section-title reveal"><span class="sec-label">Work</span></div>
+  <div class="sec-h reveal" data-delay="1">Featured Projects</div>
+  <div class="proj-grid reveal">
+    <div class="proj-card">
+      <div class="proj-live">Live</div>
+      <div class="proj-head">
+        <div class="proj-title">🤖 Mikasa Bot</div>
+        <div class="proj-btns">
+          <a class="proj-btn" href="https://m.me/j/AbYhrDx5QWRQ54or/" target="_blank"><i class="fab fa-facebook-messenger"></i></a>
+          <a class="proj-btn" href="https://github.com/SAIFUL-404-STU" target="_blank"><i class="fab fa-github"></i></a>
         </div>
       </div>
-      <p class="project-desc">Premium Facebook Messenger bot on GoatBot framework. Economy, games, VIP management, AI integration, 50+ commands, strict moderation.</p>
-      <div class="project-tags"><span class="project-tag">GoatBot</span><span class="project-tag">Node.js</span><span class="project-tag">Firebase</span><span class="project-tag">Railway</span></div>
+      <p class="proj-desc">Premium Facebook Messenger bot on GoatBot framework. Economy system, games, VIP, AI integration, image enhancer, 50+ commands. Hosted on Railway.</p>
+      <div class="proj-tags"><span class="proj-tag">GoatBot</span><span class="proj-tag">Node.js</span><span class="proj-tag">Firebase</span><span class="proj-tag">Railway</span></div>
     </div>
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-title">🌐 Saif Elite Portfolio</div>
-        <div class="project-actions">
-          <a class="project-btn" href="https://saiful-404-stu.github.io/Portofolio/" target="_blank" title="Live"><i class="fas fa-external-link-alt"></i></a>
-          <a class="project-btn" href="https://github.com/SAIFUL-404-STU/Portofolio" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+    <div class="proj-card">
+      <div class="proj-live">Live</div>
+      <div class="proj-head">
+        <div class="proj-title">🌐 Saif Elite Portfolio</div>
+        <div class="proj-btns">
+          <a class="proj-btn" href="https://saiful-404-stu.github.io/Portofolio/" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+          <a class="proj-btn" href="https://github.com/SAIFUL-404-STU/Portofolio" target="_blank"><i class="fab fa-github"></i></a>
         </div>
       </div>
-      <p class="project-desc">This portfolio — pure HTML/CSS/JS with plugin system, Firebase backend, admin panel, VIP system, fire effects, multi-page SPA, AI tools.</p>
-      <div class="project-tags"><span class="project-tag">HTML/CSS/JS</span><span class="project-tag">Firebase</span><span class="project-tag">Plugin System</span></div>
+      <p class="proj-desc">This portfolio — pure HTML/CSS/JS. Plugin system, Firebase, full admin panel, VIP, emergency banner, push notifications, fire effects.</p>
+      <div class="proj-tags"><span class="proj-tag">HTML/CSS/JS</span><span class="proj-tag">Firebase</span><span class="proj-tag">Plugin System</span></div>
     </div>
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-title">📥 AllDL API</div>
-        <div class="project-actions">
-          <a class="project-btn" href="https://alldl-0nok.onrender.com" target="_blank" title="Live API"><i class="fas fa-server"></i></a>
-          <a class="project-btn" href="https://github.com/SAIFUL-404-STU/Autodl-" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+    <div class="proj-card">
+      <div class="proj-live">Live</div>
+      <div class="proj-head">
+        <div class="proj-title">📥 AllDL API</div>
+        <div class="proj-btns">
+          <a class="proj-btn" href="https://alldl-0nok.onrender.com" target="_blank"><i class="fas fa-server"></i></a>
+          <a class="proj-btn" href="https://github.com/SAIFUL-404-STU/Autodl-" target="_blank"><i class="fab fa-github"></i></a>
         </div>
       </div>
-      <p class="project-desc">Self-hosted media downloader API. Supports YouTube, Facebook, Instagram, TikTok via yt-dlp. Deployed on Render.com with streaming support.</p>
-      <div class="project-tags"><span class="project-tag">Node.js</span><span class="project-tag">Express</span><span class="project-tag">yt-dlp</span><span class="project-tag">Render</span></div>
+      <p class="proj-desc">Self-hosted media downloader API. YouTube, Facebook, Instagram, TikTok support via yt-dlp. Streaming response, deployed on Render.com.</p>
+      <div class="proj-tags"><span class="proj-tag">Node.js</span><span class="proj-tag">Express</span><span class="proj-tag">yt-dlp</span><span class="proj-tag">Render</span></div>
     </div>
   </div>
 
@@ -979,10 +1122,9 @@ body.banner-active .wrap { margin-top:142px !important; }
     </p>
   </div>
 
-  <div class="footer" onclick="openAdmin()" style="cursor:pointer;"
-       onmouseover="this.style.opacity='1';this.style.borderColor='var(--gold)';"
-       onmouseout="this.style.opacity='0.55';this.style.borderColor='var(--footer-border)';">
-    <i class="fas fa-fire"></i> ELITE PROFILE • SAIF BABY  <i class="fas fa-crown"></i>
+  <div class="footer site-footer reveal" onclick="openAdmin()">
+    <div class="footer-main"><i class="fas fa-fire"></i> Elite Profile &bull; Saif Baby <i class="fas fa-crown"></i></div>
+    <div class="footer-copy">© 2025 Mohammad Saiful Islam — All rights reserved</div>
   </div>
 </div>
 </div>
@@ -1053,6 +1195,43 @@ body.banner-active .wrap { margin-top:142px !important; }
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+// ===== PRELOADER =====
+let preloaderHidden=false;
+function hidePreloader(){
+  if(preloaderHidden)return;
+  preloaderHidden=true;
+  const p=document.getElementById('preloader');
+  if(p){p.classList.add('hide');setTimeout(()=>p.style.display='none',700);}
+}
+window.addEventListener('load',()=>setTimeout(hidePreloader,1800));
+setTimeout(hidePreloader,3500);
+
+// ===== CUSTOM CURSOR =====
+const cursorDot=document.getElementById('cursorDot');
+const cursorRing=document.getElementById('cursorRing');
+if(cursorDot&&cursorRing){
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursorDot.style.left=mx+'px';cursorDot.style.top=my+'px';});
+  (function animCursor(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;cursorRing.style.left=rx+'px';cursorRing.style.top=ry+'px';requestAnimationFrame(animCursor);})();
+  document.querySelectorAll('a,button,[onclick]').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cursorRing.classList.add('hov'));
+    el.addEventListener('mouseleave',()=>cursorRing.classList.remove('hov'));
+  });
+}
+
+// ===== FULLSCREEN MENU =====
+function toggleFullMenu(){
+  const m=document.getElementById('fullMenu');
+  const b=document.getElementById('hamburgerBtn');
+  if(m){m.classList.toggle('open');b&&b.classList.toggle('open');}
+}
+function closeFullMenu(){
+  const m=document.getElementById('fullMenu');
+  const b=document.getElementById('hamburgerBtn');
+  if(m){m.classList.remove('open');b&&b.classList.remove('open');}
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeFullMenu();});
+
 // ===== CONFIG =====
 const ADMIN_CREDENTIALS = { email:"saifmorse04@gmail.com", password:"saiful@1" };
 const firebaseConfig = {
@@ -1679,6 +1858,7 @@ function sendContactMessage(){
 // ===== EVENT LISTENERS =====
 setInterval(()=>{if(isAdminLoggedIn&&adminSession)localStorage.setItem('adminSession',JSON.stringify(adminSession));},60000);
 window.addEventListener('beforeunload',()=>{if(currentUser)db.ref('users/'+encodeURIComponent(currentUser)).update({online:false});});
+</script>
 
 <!-- PLUGIN ANCHOR OVERRIDE — redirect all plugins to tools page -->
 <script>
