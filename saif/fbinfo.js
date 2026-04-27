@@ -1,11 +1,12 @@
 // ============================================================
-// SAIF PLUGIN: fbinfo.js  v2.0
-// Feature: Facebook UID Info + Avatar Downloader
+// SAIF PLUGIN: fbinfo.js v3.0
+// Now fetches full user info from bot backend (like spy command)
 // Author: Saif Elite
-// Fix: Removed expired token, uses public endpoints that work
 // ============================================================
 
 (function () {
+
+  const API_BASE = window.location.origin + '/api/fbinfo';  // ← Change if your bot API is elsewhere
 
   // ── INJECT UI ──────────────────────────────────────────────
   function injectUI() {
@@ -56,7 +57,7 @@
           <input type="text" id="fbUIDInput"
             placeholder="UID (e.g. 100090123456789) or profile URL..."
             style="margin:0 0 10px 0;">
-          <button onclick="handleFbInfo()"
+          <button onclick="handleFbInfoV3()"
             style="width:100%;padding:13px;border-radius:13px;border:none;
                    background:linear-gradient(135deg,#1877f2,#0d5fcc);
                    color:#fff;font-weight:900;font-size:.88rem;cursor:pointer;
@@ -68,7 +69,7 @@
           <div id="fbInfoResult"></div>
         </div>
 
-        <!-- Tab 2: DP Download -->
+        <!-- Tab 2: DP Download (unchanged) -->
         <div id="fbPanel2" style="display:none;">
           <input type="text" id="fbDPInput"
             placeholder="Facebook UID or profile URL..."
@@ -105,7 +106,6 @@
       </div>
     `;
 
-    // Inject into tools zone
     const zone = document.getElementById('toolsPluginZone');
     if (zone) zone.appendChild(box);
     else {
@@ -114,16 +114,15 @@
       else document.body.appendChild(box);
     }
 
-    // Enter key
+    // Enter key triggers search
     document.addEventListener('keydown', e => {
-      if (e.key === 'Enter' && document.activeElement.id === 'fbUIDInput') handleFbInfo();
-      if (e.key === 'Enter' && document.activeElement.id === 'fbDPInput') fbDownloadDP('large');
+      if (e.key === 'Enter' && document.activeElement.id === 'fbUIDInput') handleFbInfoV3();
     });
 
-    console.log('[Saif Plugin: fbinfo v2] UI injected ✅');
+    console.log('[Saif Plugin: fbinfo v3] UI injected ✅');
   }
 
-  // ── TAB SWITCH ─────────────────────────────────────────────
+  // ── TAB SWITCH (unchanged) ─────────────────────────────────
   window.fbSwitchTab = function(n) {
     document.getElementById('fbPanel1').style.display = n===1?'block':'none';
     document.getElementById('fbPanel2').style.display = n===2?'block':'none';
@@ -138,30 +137,29 @@
   // ── EXTRACT UID / USERNAME ─────────────────────────────────
   function extractUID(raw) {
     raw = raw.trim();
-    // Pure digits = UID
     if (/^\d+$/.test(raw)) return { uid: raw, type: 'uid' };
-    // profile.php?id=xxx
     const php = raw.match(/profile\.php\?id=(\d+)/);
     if (php) return { uid: php[1], type: 'uid' };
-    // facebook.com/username
     const url = raw.match(/facebook\.com\/([^/?&#]+)/);
     if (url && url[1] !== 'profile.php') return { uid: url[1], type: 'username' };
-    // Bare username/uid
     return { uid: raw, type: /^\d+$/.test(raw) ? 'uid' : 'username' };
   }
 
-  // ── AVATAR URL (works without token) ──────────────────────
-  function getAvatarUrl(uid, size='large') {
-    // This redirect endpoint works publicly without token
-    return `https://graph.facebook.com/${encodeURIComponent(uid)}/picture?type=${size}&redirect=true`;
+  // ── FETCH FULL INFO FROM BOT BACKEND ───────────────────────
+  async function fetchUserInfoFromBot(uid) {
+    const res = await fetch(`${API_BASE}?uid=${encodeURIComponent(uid)}`);
+    if (!res.ok) throw new Error(`Server returned ${res.status}`);
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    return data;
   }
 
-  // ── MAIN: HANDLE FB INFO ───────────────────────────────────
-  window.handleFbInfo = async function () {
+  // ── MAIN: HANDLE FB INFO (V3) ─────────────────────────────
+  window.handleFbInfoV3 = async function () {
     const raw   = (document.getElementById('fbUIDInput') || {}).value || '';
     const result = document.getElementById('fbInfoResult');
     if (!raw.trim()) {
-      notify('UID ba profile URL likhoo!', 'error');
+      fbNotify('UID or profile URL required!', 'error');
       return;
     }
 
@@ -172,34 +170,20 @@
       <div style="text-align:center;padding:22px;">
         <div style="width:36px;height:36px;border:3px solid #1877f2;border-top-color:transparent;
                     border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 12px;"></div>
-        <p style="color:#4f9dff;font-weight:700;font-size:.85rem;">Fetching info...</p>
+        <p style="color:#4f9dff;font-weight:700;font-size:.85rem;">Fetching full info...</p>
       </div>
     `;
 
     try {
-      // Build URLs
-      const avatarLarge  = getAvatarUrl(uid, 'large');
-      const avatarNormal = getAvatarUrl(uid, 'normal');
-      const profileUrl   = isUID
-        ? `https://www.facebook.com/profile.php?id=${uid}`
-        : `https://www.facebook.com/${uid}`;
-      const messengerUrl = `https://m.me/${uid}`;
+      const data = await fetchUserInfoFromBot(uid);
+      // data contains: name, uid, gender, vanity, profileUrl, birthday, alternateName,
+      // isFriend, money, rank, moneyRank, babyTeach, avatarUrl (already generated)
+      const avatarUrl = data.avatarUrl || `https://graph.facebook.com/${uid}/picture?height=1500&width=1500&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`;
 
-      // Try to probe if user exists via oEmbed (no auth needed for public profiles)
-      let displayName = isUID ? `UID: ${uid}` : `@${uid}`;
-      let extraInfo   = '';
+      const genderMap = { 1: 'Girl 🙋‍♀️', 2: 'Boy 🙋', default: 'Gay 🤷' };
+      const gender = genderMap[data.gender] || genderMap.default;
 
-      try {
-        const oembed = await fetch(
-          `https://www.facebook.com/plugins/profile/oembed/?url=${encodeURIComponent(profileUrl)}&format=json`
-        );
-        if (oembed.ok) {
-          const data = await oembed.json();
-          if (data.title) displayName = data.title;
-        }
-      } catch(_) { /* oEmbed may fail cross-origin — that's ok */ }
-
-      result.innerHTML = `
+      const infoHTML = `
         <div style="
           background:linear-gradient(135deg,rgba(24,119,242,.1),rgba(13,95,204,.05));
           padding:18px;border-radius:18px;border:1.5px solid rgba(24,119,242,.28);
@@ -209,9 +193,8 @@
           <div style="display:flex;gap:14px;align-items:center;margin-bottom:16px;">
             <div style="position:relative;flex-shrink:0;">
               <img id="fbAvatar"
-                src="${avatarLarge}"
-                alt="Avatar"
-                onerror="this.src='${avatarNormal}'"
+                src="${avatarUrl}"
+                onerror="this.src='https://graph.facebook.com/${uid}/picture?type=large'"
                 style="width:80px;height:80px;border-radius:50%;object-fit:cover;
                        border:3px solid #1877f2;box-shadow:0 0 20px rgba(24,119,242,.4);
                        background:#111;">
@@ -222,7 +205,7 @@
               "></div>
             </div>
             <div style="text-align:left;">
-              <p style="font-weight:900;font-size:1rem;color:#fff;margin:0 0 4px 0;">${displayName}</p>
+              <p style="font-weight:900;font-size:1rem;color:#fff;margin:0 0 4px 0;">${data.name}</p>
               <span style="
                 background:rgba(24,119,242,.2);color:#4f9dff;
                 padding:3px 10px;border-radius:8px;font-size:.65rem;font-weight:700;
@@ -232,32 +215,51 @@
 
           <!-- Info grid -->
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
-            ${isUID ? `
             <div style="background:rgba(0,0,0,.3);padding:11px;border-radius:11px;grid-column:1/-1;">
               <p style="font-size:.58rem;opacity:.5;color:#fff;margin:0 0 3px 0;font-weight:900;letter-spacing:1px;">FACEBOOK UID</p>
               <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
-                <p style="font-size:.82rem;font-weight:700;color:#fff;margin:0;font-family:'JetBrains Mono',monospace;">${uid}</p>
-                <button onclick="navigator.clipboard.writeText('${uid}').then(()=>fbNotify('✅ UID copied!'))"
+                <p style="font-size:.82rem;font-weight:700;color:#fff;margin:0;font-family:'JetBrains Mono',monospace;">${data.uid}</p>
+                <button onclick="navigator.clipboard.writeText('${data.uid}').then(()=>fbNotify('✅ UID copied!'))"
                   style="background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.25);
                          color:var(--gold,#ffd700);padding:5px 10px;border-radius:7px;cursor:pointer;
                          font-size:.65rem;font-weight:700;font-family:'Outfit',sans-serif;white-space:nowrap;">
                   <i class="fas fa-copy"></i> Copy
                 </button>
               </div>
-            </div>` : ''}
-            <div style="background:rgba(0,0,0,.3);padding:11px;border-radius:11px;">
-              <p style="font-size:.58rem;opacity:.5;color:#fff;margin:0 0 3px 0;font-weight:900;letter-spacing:1px;">TYPE</p>
-              <p style="font-size:.82rem;font-weight:700;color:#fff;margin:0;">${isUID ? '🔢 UID' : '📛 Username'}</p>
             </div>
             <div style="background:rgba(0,0,0,.3);padding:11px;border-radius:11px;">
-              <p style="font-size:.58rem;opacity:.5;color:#fff;margin:0 0 3px 0;font-weight:900;letter-spacing:1px;">AVATAR</p>
-              <p style="font-size:.82rem;font-weight:700;color:#25D366;margin:0;">✓ Loaded</p>
+              <p style="font-size:.58rem;opacity:.5;color:#fff;margin:0 0 3px 0;font-weight:900;letter-spacing:1px;">GENDER</p>
+              <p style="font-size:.82rem;font-weight:700;color:#fff;margin:0;">${gender}</p>
+            </div>
+            <div style="background:rgba(0,0,0,.3);padding:11px;border-radius:11px;">
+              <p style="font-size:.58rem;opacity:.5;color:#fff;margin:0 0 3px 0;font-weight:900;letter-spacing:1px;">USERNAME</p>
+              <p style="font-size:.82rem;font-weight:700;color:#fff;margin:0;">${data.vanity || 'None'}</p>
+            </div>
+            <div style="background:rgba(0,0,0,.3);padding:11px;border-radius:11px;">
+              <p style="font-size:.58rem;opacity:.5;color:#fff;margin:0 0 3px 0;font-weight:900;letter-spacing:1px;">BIRTHDAY</p>
+              <p style="font-size:.82rem;font-weight:700;color:#fff;margin:0;">${data.birthday || 'Private'}</p>
+            </div>
+            <div style="background:rgba(0,0,0,.3);padding:11px;border-radius:11px;">
+              <p style="font-size:.58rem;opacity:.5;color:#fff;margin:0 0 3px 0;font-weight:900;letter-spacing:1px;">NICKNAME</p>
+              <p style="font-size:.82rem;font-weight:700;color:#fff;margin:0;">${data.alternateName || 'None'}</p>
+            </div>
+            <div style="background:rgba(0,0,0,.3);padding:11px;border-radius:11px;">
+              <p style="font-size:.58rem;opacity:.5;color:#fff;margin:0 0 3px 0;font-weight:900;letter-spacing:1px;">FRIEND WITH BOT</p>
+              <p style="font-size:.82rem;font-weight:700;color:${data.isFriend ? '#25D366' : '#ff416c'};margin:0;">${data.isFriend ? 'Yes ✅' : 'No ❎'}</p>
+            </div>
+            <div style="background:rgba(0,0,0,.3);padding:11px;border-radius:11px;">
+              <p style="font-size:.58rem;opacity:.5;color:#fff;margin:0 0 3px 0;font-weight:900;letter-spacing:1px;">MONEY</p>
+              <p style="font-size:.82rem;font-weight:700;color:#ffd700;margin:0;">$${data.moneyFormatted || data.money}</p>
+            </div>
+            <div style="background:rgba(0,0,0,.3);padding:11px;border-radius:11px;">
+              <p style="font-size:.58rem;opacity:.5;color:#fff;margin:0 0 3px 0;font-weight:900;letter-spacing:1px;">RANK</p>
+              <p style="font-size:.82rem;font-weight:700;color:#fff;margin:0;">#${data.rank}/${data.totalUsers}</p>
             </div>
           </div>
 
           <!-- Action buttons -->
           <div style="display:flex;flex-direction:column;gap:8px;">
-            <a href="${profileUrl}" target="_blank"
+            <a href="${data.profileUrl}" target="_blank"
               style="display:flex;align-items:center;justify-content:center;gap:8px;
                      background:linear-gradient(135deg,#1877f2,#0d5fcc);color:#fff;
                      padding:12px;border-radius:12px;text-decoration:none;
@@ -265,14 +267,14 @@
               <i class="fab fa-facebook-f"></i> OPEN PROFILE
             </a>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-              <a href="${avatarLarge}" target="_blank"
+              <a href="${avatarUrl}" target="_blank"
                 style="display:flex;align-items:center;justify-content:center;gap:6px;
                        background:rgba(24,119,242,.12);border:1px solid rgba(24,119,242,.35);
                        color:#4f9dff;padding:10px;border-radius:11px;text-decoration:none;
                        font-weight:700;font-size:.75rem;">
                 <i class="fas fa-download"></i> Save DP
               </a>
-              <a href="${messengerUrl}" target="_blank"
+              <a href="https://m.me/${data.uid}" target="_blank"
                 style="display:flex;align-items:center;justify-content:center;gap:6px;
                        background:rgba(0,132,255,.12);border:1px solid rgba(0,132,255,.35);
                        color:#0084ff;padding:10px;border-radius:11px;text-decoration:none;
@@ -281,14 +283,11 @@
               </a>
             </div>
           </div>
-
-          <p style="font-size:.6rem;opacity:.3;margin-top:12px;text-align:center;color:#fff;">
-            Avatar loaded via Graph API public endpoint
-          </p>
         </div>
       `;
 
-      notify('✅ FB info loaded!', 'success');
+      result.innerHTML = infoHTML;
+      fbNotify('✅ Full info loaded!', 'success');
 
     } catch (err) {
       result.innerHTML = `
@@ -298,7 +297,7 @@
           <p style="color:#ff416c;font-weight:700;margin:0 0 12px 0;font-size:.88rem;">
             ${err.message || 'Fetch failed!'}
           </p>
-          <button onclick="handleFbInfo()"
+          <button onclick="handleFbInfoV3()"
             style="background:linear-gradient(135deg,#ff416c,#ff4b2b);border:none;
                    color:#fff;padding:10px 20px;border-radius:10px;font-weight:700;
                    cursor:pointer;font-family:'Outfit',sans-serif;font-size:.82rem;">
@@ -306,14 +305,14 @@
           </button>
         </div>
       `;
-      notify('❌ Fetch failed!', 'error');
+      fbNotify('❌ Fetch failed!', 'error');
     }
   };
 
-  // ── DP DOWNLOAD TAB ────────────────────────────────────────
+  // ── DP DOWNLOAD TAB (unchanged) ────────────────────────────
   window.fbDownloadDP = function(size) {
     const raw = (document.getElementById('fbDPInput') || {}).value || '';
-    if (!raw.trim()) { notify('UID ba URL diye dao!', 'error'); return; }
+    if (!raw.trim()) { fbNotify('UID or URL required!', 'error'); return; }
     const { uid } = extractUID(raw);
     const dpResult = document.getElementById('fbDPResult');
 
@@ -324,7 +323,7 @@
       square: { type:'square', label:'Square (max)' },
     };
     const { type, label } = sizeMap[size] || sizeMap.large;
-    const url = getAvatarUrl(uid, type);
+    const url = `https://graph.facebook.com/${uid}/picture?type=${type}`;
 
     dpResult.innerHTML = `
       <div style="background:rgba(0,0,0,.3);border:1px solid rgba(24,119,242,.2);
@@ -351,19 +350,19 @@
         </div>
       </div>
     `;
-    notify(`📸 DP loaded (${label})`, 'success');
+    fbNotify(`📸 DP loaded (${label})`, 'success');
   };
 
   // ── NOTIFY HELPER ──────────────────────────────────────────
-  function notify(msg, type) {
+  function fbNotify(msg, type) {
     if (typeof showNotification === 'function') showNotification(msg, type);
     else console.log(`[fbinfo] ${msg}`);
   }
-  window.fbNotify = notify;
+  window.fbNotify = fbNotify;
 
   // ── INIT ───────────────────────────────────────────────────
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', injectUI);
   else injectUI();
 
-  console.log('[Saif Plugin: fbinfo v2] Loaded ✅');
+  console.log('[Saif Plugin: fbinfo v3] Loaded ✅');
 })();
